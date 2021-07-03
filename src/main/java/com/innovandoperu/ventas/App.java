@@ -46,9 +46,9 @@ public class App {
                                 if (!articuloList.isEmpty()) {
                                     for (Articulo art : articuloList) {
                                         System.out.println(art.toString());
-                                        System.out.println("");
-                                        System.out.println("");
                                     }
+                                    System.out.println("");
+                                    System.out.println("");
                                 } else {
                                     System.out.println("No hay articulos para mostra\n\n");
                                 }
