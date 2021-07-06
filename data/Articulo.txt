@@ -1,0 +1,3 @@
+A1	Pantalon	10.0
+A2	Chompa	15.0
+A3	Casaca	70.0

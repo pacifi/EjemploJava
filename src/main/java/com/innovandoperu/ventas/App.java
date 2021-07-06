@@ -5,6 +5,9 @@
  */
 package com.innovandoperu.ventas;
 
+import com.innovandoperu.ventas.dao.ArticuloDao;
+import com.innovandoperu.ventas.dao.ClienteDao;
+import com.innovandoperu.ventas.dao.VentaDao;
 import com.innovandoperu.ventas.modelo.Articulo;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,45 +27,74 @@ public class App {
         int opcionPrincipal;
         int opcionArticulo;
         do {
-            System.out.println("======== Sistema de Ventas ========");
-            System.out.println("=====Menu de Información=====");
-            System.out.println("1: Para Ver Articulos");
-            System.out.println("2: Para Realizar la venta");
-            System.out.println("0: Para Salir ");
+
+            String menu = "======== Sistema de Ventas ========"
+                    + "\n=====Menu de Información====="
+                    + "\n1: Para Ver Articulos"
+                    + "\n2: Para Ver Clientes"
+                    + "\n: Para Realizar la venta"
+                    + "\n0: Para Salir ";
+            System.out.println(menu);
+
             opcionPrincipal = scanner.nextInt();
 
             switch (opcionPrincipal) {
                 case 1: {
                     do {
+                        ArticuloDao articuloDao = new ArticuloDao();
                         System.out.println("===== Opcion de articulos ======");
                         System.out.println("1: Para Listar Articulos");
                         System.out.println("2: Para Registrar Articulos");
+                        System.out.println("3: Para Buscar Articulos");
                         System.out.println("0: Para Regresar al menu anterior\n\n");
 
                         opcionArticulo = scanner.nextInt();
                         switch (opcionArticulo) {
                             case 1: {
                                 System.out.println("====== Lista de articulos ======");
-                                if (!articuloList.isEmpty()) {
-                                    for (Articulo art : articuloList) {
-                                        System.out.println(art.toString());
-                                    }
-                                    System.out.println("");
-                                    System.out.println("");
-                                } else {
-                                    System.out.println("No hay articulos para mostra\n\n");
-                                }
+//                                if (!articuloList.isEmpty()) {
+//
+//                                    for (Articulo art : articuloList) {
+//                                        // art = articuloList[i]
+//                                        System.out.println(art.getNombre());
+//                                        System.out.println(art.getPrecio());
+//                                    }
+//
+//                                    for (int i = 0; i < articuloList.size(); i++) {
+//                                        System.out.println("Impresion for clasico");
+//                                        System.out.println(articuloList.get(i).toString());
+//
+//                                    }
+//                                    System.out.println("");
+//                                    System.out.println("");
+//                                } else {
+//                                    System.out.println("No hay articulos para mostra\n\n");
+//                                }
+                                articuloDao.reportarArticulo();
                             }
                             break;
                             case 2: {
-                                Articulo articulo = new Articulo();
-                                System.out.println("Ingrese Nombre");
-//                                articulo.setNombre(scanner.next());
-                                articulo.nombre = scanner.next();
-                                System.out.println("Ingrese Precio");
-                                articulo.precio = scanner.nextDouble();
-//                                articulo.setPrecio(scanner.nextDouble());
-                                articuloList.add(articulo);
+                                // Creando Objeto art de tipo Articulo
+//                                Articulo art = new Articulo();
+//                                System.out.println("Ingrese Nombre");
+//                                art.setNombre(scanner.next());
+//
+//                                System.out.println("Ingrese Precio");
+//
+//                                art.setPrecio(scanner.nextDouble());
+                                articuloDao.registrarArticulo();
+                            }
+                            break;
+                            case 3: {
+                                System.out.println("Ingrese id Artuculo");
+                                String idArticulo = scanner.next();
+                                Articulo art = articuloDao.buscarArticulo(idArticulo);
+                                System.out.println("Este es el ID");
+                                System.out.println(art.getIdArticulo());
+                                System.out.println("Este es el nobre");
+                                System.out.println(art.getNombre());
+                                System.out.println("este es el precio");
+                                System.out.println(art.getPrecio());
 
                             }
                             break;
@@ -77,6 +109,63 @@ public class App {
                 }
                 break;
                 case 2: {
+                    int opcionCliente;
+                    ClienteDao clienteDao = new ClienteDao();
+                    do {
+                        System.out.println("===== Opcion de Clientes ======");
+                        System.out.println("1: Para Listar Clientes");
+                        System.out.println("2: Para Registrar Clientes");
+                        System.out.println("0: Para Regresar al menu anterior\n\n");
+                        opcionCliente = scanner.nextInt();
+                        switch (opcionCliente) {
+                            case 1: {
+                                clienteDao.reportarCliente();
+                            }
+                            break;
+                            case 2: {
+                                clienteDao.registrarCliente();
+                            }
+                            break;
+                            case 3: {
+                            }
+
+                            break;
+                            default:
+                                break;
+                        }
+
+                    } while (opcionCliente != 0);
+
+                }
+                break;
+
+                case 3: {
+                    int opcionVenta;
+                    VentaDao ventaDao = new VentaDao();
+                    do {
+                        System.out.println("===== Opcion de Venta ======");
+                        System.out.println("1: Para Listar Ventas");
+                        System.out.println("2: Para Registrar Venta");
+                        System.out.println("0: Para Regresar al menu anterior\n\n");
+                        opcionVenta = scanner.nextInt();
+                        switch (opcionVenta) {
+                            case 1: {
+
+                            }
+                            break;
+                            case 2: {
+                                ventaDao.realizarVenta();
+                            }
+                            break;
+                            case 3: {
+                            }
+
+                            break;
+                            default:
+                                break;
+                        }
+
+                    } while (opcionVenta != 0);
 
                 }
                 break;
